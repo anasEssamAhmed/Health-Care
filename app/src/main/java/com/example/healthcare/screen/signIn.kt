@@ -19,7 +19,7 @@ import com.google.firebase.ktx.Firebase
 
 class signIn : AppCompatActivity() {
     private lateinit var binding : SignInScreenBinding
-    private lateinit var auth: FirebaseAuth
+    private var auth = Firebase.auth
     private var firestore = Firebase.firestore
     private var gender : String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,6 @@ class signIn : AppCompatActivity() {
         binding = SignInScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
         checkConnected()
-        auth = Firebase.auth
         binding.signAccountButton.setOnClickListener {
             if (binding.emailTextFieldSignIn.text!!.isNotEmpty() && binding.passwordTextFieldSignIn.text!!.isNotEmpty()) {
                 signIn(
@@ -95,4 +94,5 @@ class signIn : AppCompatActivity() {
                 .show()
         }
     }
+
 }

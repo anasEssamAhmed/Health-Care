@@ -7,10 +7,16 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import com.example.healthcare.databinding.WelcomeScreenBinding
+import com.example.healthcare.screen.doctor.Home
+import com.example.healthcare.screen.sick.HomeSick
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 class Welcome : AppCompatActivity() {
     private lateinit var binding : WelcomeScreenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = WelcomeScreenBinding.inflate(layoutInflater)
@@ -62,4 +68,5 @@ class Welcome : AppCompatActivity() {
                 .show()
         }
     }
+
 }
