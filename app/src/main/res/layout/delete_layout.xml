@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="8dp">
+
+    <TextView
+        android:id="@+id/deleteForEveryOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/MyTextFont"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:padding="16dp"
+        android:drawableStart="@drawable/baseline_delete_forever_24"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:text="حذف الرسالة عند الكل"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A5A4A4"/>
+
+    <TextView
+        android:id="@+id/deleteForMe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/MyTextFont"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:padding="16dp"
+        android:drawableStart="@drawable/baseline_delete_24"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:text="حذف من عندي فقط"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A5A4A4"/>
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/MyTextFont"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:padding="16dp"
+        android:drawableStart="@drawable/baseline_cancel_24"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:text="الغاء"/>
+</LinearLayout>

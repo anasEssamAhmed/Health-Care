@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".screen.signUp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Image View -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/upload"/>
+        <!-- Name -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/family_name_textinputlayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:hint="اسمك الكامل"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:textAppearance="@style/MyTextFont"
+                app:boxBackgroundColor="#F1F1F1"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_person">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textDirection="rtl" />
+            </com.google.android.material.textfield.TextInputLayout>
+        <!-- Date of Birth -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/date_of_birth_textinputlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="تاريخ الميلاد"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textAppearance="@style/MyTextFont"
+            app:endIconMode="clear_text"
+            app:boxBackgroundColor="#F1F1F1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginBottom="5dp"
+            app:startIconDrawable="@drawable/ic_calendar">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/date_of_birth_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="rtl"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Address -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/address_textinputlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="العنوان"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textAppearance="@style/MyTextFont"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:boxBackgroundColor="#F1F1F1"
+            android:layout_marginBottom="5dp"
+            app:startIconDrawable="@drawable/ic_location">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="rtl"
+                android:inputType="textPostalAddress"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_textinputlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="#F1F1F1"
+            android:layout_marginBottom="5dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="البريد الالكتروني"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textAppearance="@style/MyTextFont"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_email">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="rtl"
+                android:inputType="textEmailAddress"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Mobile Number -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mobile_number_textinputlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="رقم الهاتف"
+            android:textAppearance="@style/MyTextFont"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:prefixTextColor="@color/teal_200"
+            android:layout_marginBottom="5dp"
+            app:boxBackgroundColor="#F1F1F1"
+            app:startIconDrawable="@drawable/ic_phone">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/mobile_number_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="rtl"
+                android:inputType="number"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_textinputlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="#F1F1F1"
+            android:layout_marginBottom="5dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="كلمة المرور"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textAppearance="@style/MyTextFont"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/ic_lock">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="rtl"
+                android:inputType="numberPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Confirem Password -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirm_password_textinputlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="#F1F1F1"
+            android:layout_marginBottom="2dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="تاكيد كلمة المرور"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textAppearance="@style/MyTextFont"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/ic_lock">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirm_password_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="rtl"
+                android:inputType="numberPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+<!--
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_textinputlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="كلمة المرور"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:textAppearance="@style/MyTextFont"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxBackgroundColor="#F1F1F1"
+            app:startIconDrawable="@drawable/ic_lock"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            app:endIconMode="password_toggle">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="30"
+                android:textDirection="rtl"
+                android:gravity="right"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirm_password_textinputlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="تاكيد كلمة المرور"
+            android:textAppearance="@style/MyTextFont"
+            app:boxBackgroundColor="#F1F1F1"
+            app:counterEnabled="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:counterMaxLength="30"
+            app:startIconDrawable="@drawable/ic_lock"
+            app:endIconMode="password_toggle">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirm_password_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="rtl"
+                android:maxLength="30"
+                android:gravity="right"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout> -->
+
+        <!-- Radio Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:orientation="horizontal">
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radioButtonSick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="مريض"
+                    android:textAppearance="@style/MyTextFont"
+                    android:textSize="15sp"
+                    android:textDirection="rtl"
+                    android:buttonTint="@color/teal_200"
+                    />
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radioButtonDoctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="طبيب"
+                    android:textAppearance="@style/MyTextFont"
+                    android:textSize="15sp"
+                    android:textDirection="rtl"
+                    android:buttonTint="@color/teal_200"
+                    />
+            </RadioGroup>
+        </LinearLayout>
+        <!-- check Box  -->
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkBoxPrivcy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textSize="12sp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:textAppearance="@style/MyTextFont"
+            android:text="هل انت موافق على استخدام المعلومات الخاصة بك في تقدم تجربة مميزة لك"
+            />
+
+
+        <!-- Create Account Button -->
+        <Button
+            android:id="@+id/create_account_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="انشاء حساب"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textAppearance="@style/MyTextFont"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/teal_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+</ScrollView>

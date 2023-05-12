@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.sick.Profile">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Image view to view logo -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Email TextField -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailTextFieldProfileLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="البريد الالكتروني"
+            app:boxBackgroundColor="#F1F1F1"
+            android:textAppearance="@style/MyTextFont"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewProfile"
+            app:startIconDrawable="@drawable/ic_email">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailTextFieldProfile1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textDirection="rtl"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- phone number TextField -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneNumberTextFieldProfileLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="20dp"
+            android:hint="رقم الهاتف"
+            android:textAppearance="@style/MyTextFont"
+            app:boxBackgroundColor="#F1F1F1"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:startIconDrawable="@drawable/ic_phone"
+            app:layout_constraintTop_toBottomOf="@id/emailTextFieldProfileLayout">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneNumberTextFieldProfile1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textDirection="rtl"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- address TextField -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addressTextFieldProfileLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="20dp"
+            android:hint="العنوان"
+            android:textAppearance="@style/MyTextFont"
+            app:boxBackgroundColor="#F1F1F1"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phoneNumberTextFieldProfileLayout"
+            app:startIconDrawable="@drawable/ic_location">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addressTextFieldProfile1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textDirection="rtl"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/change_disease_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#272E2E"
+            android:text="تغيير نوع المرض"
+            android:textAppearance="@style/MyTextFont"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addressTextFieldProfileLayout" />
+        <!-- Changing disease type -->
+        <Button
+            android:id="@+id/change_password_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#272E2E"
+            android:text="طلب تغيير كلمة المرور"
+            android:textAppearance="@style/MyTextFont"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_disease_button" />
+        <!-- save Button -->
+        <Button
+            android:id="@+id/save_button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/teal_700"
+            android:text="تعديل"
+            android:textAppearance="@style/MyTextFont"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_password_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

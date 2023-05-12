@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/myAccountDoctor"
+        android:icon="@drawable/ic_person"
+        android:title="حسابي" />
+    <item
+        android:id="@+id/postView"
+        android:icon="@drawable/article_icon"
+        android:title="عرض المقالات"/>
+    <item
+        android:id="@+id/chatWithDoctor"
+        android:icon="@drawable/chat_icon"
+        android:title="محادثة المرضى"/>
+    <item
+        android:id="@+id/sendNotification"
+        android:title="ارسال الاشعار"
+        android:icon="@drawable/send_notification_icon"/>
+    <item
+        android:id="@+id/addPost"
+        android:title="اضافة مقالة"
+        android:icon="@drawable/add_post_icon"/>
+
+</menu>

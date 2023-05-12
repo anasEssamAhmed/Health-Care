@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Main Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Add a Toolbar to show drawer indicator -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/teal_700"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:title="الرعاية الصحية"
+            app:titleTextAppearance="@style/MyTextFont"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_menu"
+            app:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"/>
+
+        <FrameLayout
+            android:id="@+id/continer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <!-- Your main content goes here -->
+    </LinearLayout>
+
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        app:itemIconTint="@color/teal_700"
+        app:itemTextColor="@color/black"
+        app:itemTextAppearance="@style/MyTextFont"
+        app:headerLayout="@layout/drwaer_header"
+        app:menu="@menu/menu_doctor" >
+
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

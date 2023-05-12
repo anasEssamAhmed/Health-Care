@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Health care</string>
+    <string name="welcome_image_description">مرحبا بك في تطبيق الرعاية الصحية</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="arrayOfDisease">
+        <item>السكري</item>
+        <item>ارتفاع ضغط الدم</item>
+        <item>السمنة</item>
+        <item>السرطان</item>
+        <item>الكلى</item>
+        <item>الربو</item>
+        <item>القلب</item>
+        <item>الزهايمر</item>
+    </string-array>
+</resources>
