@@ -59,14 +59,17 @@
         android:textAppearance="@style/MyTextFont"
         app:endIconMode="password_toggle"
         app:layout_constraintTop_toBottomOf="@id/emailTextFieldSignInLayout"
-
         app:startIconDrawable="@drawable/ic_lock">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordTextFieldSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textDirection="rtl"
-            android:inputType="numberPassword"/>
+            android:inputType="textPassword"
+            android:importantForAutofill="no"
+            android:privateImeOptions="nm"
+            android:imeOptions="actionDone"
+            android:imeActionLabel="Done"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Sign Account Button -->

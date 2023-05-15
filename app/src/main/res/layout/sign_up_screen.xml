@@ -148,7 +148,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textDirection="rtl"
-                android:inputType="numberPassword"/>
+                android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Confirem Password -->
@@ -170,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textDirection="rtl"
-                android:inputType="numberPassword"/>
+                android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 <!--
         <com.google.android.material.textfield.TextInputLayout

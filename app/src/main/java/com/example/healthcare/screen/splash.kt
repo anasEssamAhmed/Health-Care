@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.healthcare.R
@@ -21,8 +22,10 @@ class splash : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
+     //   auth.signOut()
         Handler().postDelayed(
             {
+                Log.d("aaa" , auth.currentUser?.email.toString())
                 if (auth.currentUser != null){
                     getGender()
                 }else {

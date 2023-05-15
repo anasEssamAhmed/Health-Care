@@ -2,6 +2,7 @@ package com.example.healthcare.screen
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -18,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isNotEmpty
 import com.example.healthcare.R
 import com.example.healthcare.databinding.SignUpScreenBinding
+import com.example.healthcare.funcation.Massage
+import com.example.healthcare.funcation.firebase
 import com.example.healthcare.model.User
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
@@ -32,9 +35,10 @@ class signUp : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private lateinit var binding: SignUpScreenBinding
     private lateinit var auth: FirebaseAuth
     private val firestore = Firebase.firestore
-    private var filePhoto : Uri? = null
-    private var filePhotoInFirebase : String? = null
+    private var filePhoto: Uri? = null
+    private var filePhotoInFirebase: String? = null
     private val REQUEST_CODE_SELECT_PHOTO = 200
+    private var isTokenShowOrNot = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SignUpScreenBinding.inflate(layoutInflater)
@@ -63,27 +67,31 @@ class signUp : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             if (isEmpty) {
                 if (binding.passwordEdittext.text.toString() == binding.confirmPasswordEdittext.text.toString()) {
                     if (binding.radioButtonDoctor.isChecked || binding.radioButtonSick.isChecked) {
-                        if(binding.checkBoxPrivcy.isChecked) {
+                        if (binding.checkBoxPrivcy.isChecked) {
                             createAccount(
                                 binding.emailEdittext.text.toString(),
                                 binding.passwordEdittext.text.toString()
                             )
-                        }else {
+                        } else {
                             Toast.makeText(
-                                applicationContext, "يجب الموافقة على استخدام المعلومات الخاصة بك من اجل انشاء حساب لك", Toast.LENGTH_SHORT
+                                applicationContext,
+                                "يجب الموافقة على استخدام المعلومات الخاصة بك من اجل انشاء حساب لك",
+                                Toast.LENGTH_SHORT
                             ).show()
                         }
-                    }else {
+                    } else {
                         Toast.makeText(
-                            applicationContext, "يجب اختيار النوع : هل انت طبيب ام مريض ؟", Toast.LENGTH_SHORT
+                            applicationContext,
+                            "يجب اختيار النوع : هل انت طبيب ام مريض ؟",
+                            Toast.LENGTH_SHORT
                         ).show()
                     }
-                }else {
+                } else {
                     Toast.makeText(
                         applicationContext, "يجب تطابق كلمة المرور", Toast.LENGTH_SHORT
                     ).show()
                 }
-            }else {
+            } else {
                 Toast.makeText(
                     applicationContext, "يرجى تعبئة جميع الحقول", Toast.LENGTH_SHORT
                 ).show()
@@ -117,78 +125,35 @@ class signUp : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     //Create account
     private fun createAccount(email: String, password: String) {
-        checkConnected()
-        val randomId = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().reference.child("Profile").child(randomId)
-        ref.putFile(filePhoto!!).addOnSuccessListener {
-            ref.downloadUrl.addOnSuccessListener {
-                filePhotoInFirebase = it.toString()
-                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(applicationContext, "تم التسجيل بنجاح", Toast.LENGTH_SHORT)
-                            .show()
-                        //references firestore
-                        val ref = firestore.collection("users").document(auth.currentUser!!.uid)
-                        val name = binding.nameEdittext.text.toString()
-                        val mobileNumber = binding.mobileNumberEdittext.text.toString()
-                        var gender = ""
-                        if (binding.radioButtonDoctor.isChecked) {
-                            gender = "طبيب"
-                        }else {
-                            gender = "مريض"
-                        }
-
-                        val user = User(name , binding.dateOfBirthEdittext.text.toString(), binding.addressEdittext.text.toString() , mobileNumber , gender , filePhotoInFirebase!!)
-                        ref.set(user)
-                            .addOnSuccessListener {
-                                Log.d("ooo" , "Success to add to firestore")
-                                val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-                                // Log the user account creation event
-                                val accountCreateBundle = Bundle()
-                                accountCreateBundle.putString(FirebaseAnalytics.Param.METHOD, email)
-                                mFirebaseAnalytics.logEvent(
-                                    FirebaseAnalytics.Event.SIGN_UP,
-                                    accountCreateBundle
-                                )
-
-                                var i = Intent(this , SelectDisease :: class.java)
-                                startActivity(i)
-                                finish()
-                            }
-                            .addOnFailureListener {
-                                Log.d("ooo" , "Failure to add to firestore")
-                            }
-                    } else {
-                        var exception = task.exception.toString().split(":")
-                        Log.d("ooo", exception[1])
-                        if (exception[1] == " The email address is badly formatted.") {
-                            Toast.makeText(
-                                applicationContext,
-                                "يرجى التاكد من البريد الالكتروني",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                        if (exception[1] == " The email address is already in use by another account.") {
-                            Toast.makeText(
-                                applicationContext, "البريد الالكتروني مسجل بالفعل", Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                        if (exception[1] == " The given password is invalid. [ Password should be at least 6 characters ]") {
-                            Toast.makeText(
-                                applicationContext,
-                                "يرجى استخدام على الاقل 6 حروف في كلمة المرور",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("جاري التسجيل")
+        progressDialog.setMessage("رجاء قم بالانتظار ...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+        Massage().getToken { t ->
+            firestore.collection("Token").get().addOnSuccessListener { document ->
+                for (i in document.documents) {
+                    val token = i.getString("token")
+                    if (token == t) {
+                        Toast.makeText(
+                            this,
+                            "لا يمكن انشاء حساب اضافي على هذا الجهاز بسبب وجود حساب اخر",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        isTokenShowOrNot = 5
+                        progressDialog.dismiss()
                     }
                 }
+                createInforamtion(email, password, progressDialog)
+            }.addOnFailureListener {
+                createInforamtion(email, password, progressDialog)
             }
         }
 
+
     }
 
-    fun checkConnected(){
+    fun checkConnected() {
         // check the internet connected or not
         val connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
@@ -211,14 +176,120 @@ class signUp : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_SELECT_PHOTO && resultCode == Activity.RESULT_OK) {
-            if (data?.data == null){
-                Toast.makeText(this , "يوجد مشكلة قم برفع صورة اخرى" , Toast.LENGTH_SHORT).show()
-                Picasso.get().load(filePhoto).placeholder(R.drawable.upload).into(binding.imageProfile)
+            if (data?.data == null) {
+                Toast.makeText(this, "يوجد مشكلة قم برفع صورة اخرى", Toast.LENGTH_SHORT).show()
+                Picasso.get().load(filePhoto).placeholder(R.drawable.upload)
+                    .into(binding.imageProfile)
 
-            }else {
+            } else {
                 filePhoto = data.data
-                Picasso.get().load(filePhoto).placeholder(R.drawable.upload).into(binding.imageProfile)
+                Picasso.get().load(filePhoto).placeholder(R.drawable.upload)
+                    .into(binding.imageProfile)
             }
+        }
+    }
+
+    private fun createInforamtion(email: String, password: String, progressDialog: ProgressDialog){
+        if (isTokenShowOrNot == 0) {
+            checkConnected()
+            val randomId = UUID.randomUUID().toString()
+            val ref =
+                FirebaseStorage.getInstance().reference.child("Profile").child(randomId)
+            ref.putFile(filePhoto!!).addOnSuccessListener {
+                ref.downloadUrl.addOnSuccessListener {
+                    filePhotoInFirebase = it.toString()
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "تم التسجيل بنجاح",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                                //references firestore
+                                val ref = firestore.collection("users")
+                                    .document(auth.currentUser!!.uid)
+                                val name = binding.nameEdittext.text.toString()
+                                val mobileNumber =
+                                    binding.mobileNumberEdittext.text.toString()
+                                var gender = ""
+                                if (binding.radioButtonDoctor.isChecked) {
+                                    gender = "طبيب"
+                                } else {
+                                    gender = "مريض"
+                                }
+
+                                val user = User(
+                                    name,
+                                    binding.dateOfBirthEdittext.text.toString(),
+                                    binding.addressEdittext.text.toString(),
+                                    mobileNumber,
+                                    gender,
+                                    filePhotoInFirebase!!
+                                )
+                                ref.set(user)
+                                    .addOnSuccessListener {
+                                        Log.d("ooo", "Success to add to firestore")
+                                        val mFirebaseAnalytics =
+                                            FirebaseAnalytics.getInstance(this)
+                                        // Log the user account creation event
+                                        val accountCreateBundle = Bundle()
+                                        accountCreateBundle.putString(
+                                            FirebaseAnalytics.Param.METHOD,
+                                            email
+                                        )
+                                        mFirebaseAnalytics.logEvent(
+                                            FirebaseAnalytics.Event.SIGN_UP,
+                                            accountCreateBundle
+                                        )
+                                        progressDialog.dismiss()
+                                        val i = Intent(this, SelectDisease::class.java)
+                                        startActivity(i)
+                                        finish()
+                                    }
+                                    .addOnFailureListener {
+                                        Log.d("ooo", "Failure to add to firestore")
+                                        progressDialog.dismiss()
+                                    }
+                            } else {
+                                progressDialog.dismiss()
+                                val exception = task.exception.toString().split(":")
+                                Log.d("ooo", exception[1])
+                                if (exception[1] == " The email address is badly formatted.") {
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "يرجى التاكد من البريد الالكتروني",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+
+                                }
+                                if (exception[1] == " The email address is already in use by another account.") {
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "البريد الالكتروني مسجل بالفعل",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                if (exception[1] == " The given password is invalid. [ Password should be at least 6 characters ]") {
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "يرجى استخدام على الاقل 6 حروف في كلمة المرور",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
+                            }
+                        }.addOnFailureListener {
+                            progressDialog.dismiss()
+                        }
+                }.addOnFailureListener {
+                    progressDialog.dismiss()
+                }
+            }.addOnFailureListener {
+                progressDialog.dismiss()
+            }
+
         }
     }
 

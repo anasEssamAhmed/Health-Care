@@ -1,5 +1,6 @@
 package com.example.healthcare.screen
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -42,9 +43,15 @@ class signIn : AppCompatActivity() {
     }
     // sign in
     private fun signIn(email : String , password : String ){
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("جاري تسجيل الدخول")
+        progressDialog.setMessage("رجاء قم بالانتظار ...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {task ->
                 if (task.isSuccessful) {
+                    progressDialog.dismiss()
                     Toast.makeText(applicationContext , "تم تسجيل الدخول بنجاح" , Toast.LENGTH_SHORT).show()
                     getGender()
                     val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -55,6 +62,8 @@ class signIn : AppCompatActivity() {
                 }else {
                     Toast.makeText(applicationContext , "يوجد خطا في كلمة المرور او البريد الالكتروني" , Toast.LENGTH_SHORT).show()
                 }
+            }.addOnFailureListener {
+                progressDialog.dismiss()
             }
     }
 

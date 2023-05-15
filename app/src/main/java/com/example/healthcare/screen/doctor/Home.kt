@@ -114,6 +114,11 @@ class Home : AppCompatActivity() {
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
+                R.id.signOutDoc -> {
+                    auto.signOut()
+                    finishAffinity()
+                    true
+                }
                 else -> false
             }
         }

@@ -68,6 +68,11 @@ class HomeSick : AppCompatActivity() {
                         .commit()
                     true
                 }
+                R.id.signOut -> {
+                    auth.signOut()
+                    finishAffinity()
+                    true
+                }
                 else -> false
             }
 

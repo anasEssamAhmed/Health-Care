@@ -20,5 +20,9 @@
         android:id="@+id/addPost"
         android:title="اضافة مقالة"
         android:icon="@drawable/add_post_icon"/>
+    <item
+        android:id="@+id/signOutDoc"
+        android:title="تسجيل خروج"
+        android:icon="@drawable/baseline_logout_24"/>
 
 </menu>

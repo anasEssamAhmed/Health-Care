@@ -72,8 +72,7 @@ class SelectDisease : AppCompatActivity() {
         ref.update("المرض", binding.selectDiseaseInput.text.toString())
             .addOnSuccessListener {
                 Toast.makeText(applicationContext , "تم التحديث بنجاح"  , Toast.LENGTH_SHORT).show()
-                val i = Intent(this , HomeSick :: class.java)
-                startActivity(i)
+                finish()
             }
     }
     fun checkConnected(){
