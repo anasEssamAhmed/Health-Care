@@ -16,6 +16,7 @@ import com.example.healthcare.R
 import com.example.healthcare.databinding.ActivityHomeBinding
 import com.example.healthcare.funcation.Massage
 import com.example.healthcare.funcation.firebase
+import com.example.healthcare.screen.Welcome
 import com.example.healthcare.screen.sick.Profile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -116,7 +117,8 @@ class Home : AppCompatActivity() {
                 }
                 R.id.signOutDoc -> {
                     auto.signOut()
-                    finishAffinity()
+                    startActivity(Intent(this , Welcome() :: class.java))
+                    finish()
                     true
                 }
                 else -> false

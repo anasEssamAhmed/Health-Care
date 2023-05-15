@@ -11,6 +11,7 @@ import com.example.healthcare.R
 import com.example.healthcare.databinding.HomeScreenBinding
 import com.example.healthcare.funcation.Massage
 import com.example.healthcare.funcation.firebase
+import com.example.healthcare.screen.Welcome
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -70,7 +71,8 @@ class HomeSick : AppCompatActivity() {
                 }
                 R.id.signOut -> {
                     auth.signOut()
-                    finishAffinity()
+                    startActivity(Intent(this , Welcome() :: class.java))
+                    finish()
                     true
                 }
                 else -> false

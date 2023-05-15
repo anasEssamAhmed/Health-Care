@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.healthcare.R
 import com.example.healthcare.databinding.SelectDiseaseBinding
+import com.example.healthcare.screen.doctor.Home
 import com.example.healthcare.screen.sick.HomeSick
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -21,6 +22,7 @@ class SelectDisease : AppCompatActivity() {
     private lateinit var binding: SelectDiseaseBinding
     private lateinit var auth: FirebaseAuth
     private val firestore = Firebase.firestore
+    private var gender : String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SelectDiseaseBinding.inflate(layoutInflater)
@@ -53,9 +55,7 @@ class SelectDisease : AppCompatActivity() {
         ref.set(data)
             .addOnSuccessListener {
                 Toast.makeText(applicationContext, "تمت الحفظ بنجاح", Toast.LENGTH_SHORT).show()
-                val i = Intent(applicationContext, signIn::class.java)
-                startActivity(i)
-                finish()
+                getGender()
             }
             .addOnFailureListener {
                 Toast.makeText(
@@ -92,5 +92,22 @@ class SelectDisease : AppCompatActivity() {
                 }
                 .show()
         }
+    }
+
+    private fun getGender(){
+        firestore.collection("users").document(auth.currentUser!!.uid)
+            .get()
+            .addOnSuccessListener {
+                gender = it.getString("gender")
+                if (gender == "طبيب"){
+                    var i = Intent(this , Home :: class.java)
+                    startActivity(i)
+                    finishAffinity()
+                }else {
+                    var i = Intent(this , HomeSick :: class.java)
+                    startActivity(i)
+                    finishAffinity()
+                }
+            }
     }
 }
