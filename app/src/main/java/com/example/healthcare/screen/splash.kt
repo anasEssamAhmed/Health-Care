@@ -26,7 +26,7 @@ class splash : AppCompatActivity() {
         Handler().postDelayed(
             {
                 Log.d("aaa" , auth.currentUser?.email.toString())
-                if (auth.currentUser != null){
+                if (auth.currentUser?.email != null){
                     getGender()
                 }else {
                     var i = Intent(this, Welcome::class.java)

@@ -144,6 +144,7 @@ class AddPostFragment : Fragment() {
                 if (userId != null) {
                     getTokenUserFromFirestoreAndPostNotification()
                 }else {
+                    Log.d("sss" , "This is not token")
                     FCMSend().send(requireContext(),binding.editTextTextTitle.text.toString() , binding.editTextText.text.toString() , null)
                     Toast.makeText(activity , "تم الارسال بنجاح" , Toast.LENGTH_SHORT).show()
                 }
@@ -288,7 +289,7 @@ class AddPostFragment : Fragment() {
             .get()
             .addOnSuccessListener {
                 val token = it.getString("token")
-                Log.d("aaa" , "This is Token : $token")
+                Log.d("sss" , "This is Token : $token")
                 FCMSend().send(requireContext(),binding.editTextTextTitle.text.toString() , binding.editTextText.text.toString() , token)
                 Toast.makeText(activity , "تم الارسال بنجاح" , Toast.LENGTH_SHORT).show()
             }

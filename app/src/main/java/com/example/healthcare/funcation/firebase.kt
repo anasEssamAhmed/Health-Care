@@ -96,7 +96,7 @@ class firebase {
             } else if (it == "القلب") {
                 name = "heart"
                 callbacks(name ?: "")
-            } else if (it == "Alzheimer") {
+            } else if (it == "الزهايمر") {
                 name = "Alzheimer"
                 callbacks(name ?: "")
             }

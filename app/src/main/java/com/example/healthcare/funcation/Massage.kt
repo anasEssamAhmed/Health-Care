@@ -37,7 +37,7 @@ class Massage : FirebaseMessagingService() {
         val title = message.notification?.title
         val body = message.notification?.body
         val channelID = "MassageFromApp"
-        val notificationSoundUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.sound)
+        val notificationSoundUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.sound_me)
         if (Build.VERSION.SDK_INT >= 26) {
             val channel =
                 NotificationChannel(channelID, "Massage", NotificationManager.IMPORTANCE_HIGH)
@@ -48,10 +48,8 @@ class Massage : FirebaseMessagingService() {
                 .setContentTitle(title)
                 .setSmallIcon(R.drawable.baseline_notifications_active_24)
                 .setAutoCancel(true)
-                .setOnlyAlertOnce(true)
-                .setPriority(Notification.PRIORITY_DEFAULT)
-                .setSound(notificationSoundUri)
                 .setColor(Color.GREEN)
+                .setSound(notificationSoundUri)
 
             if (ActivityCompat.checkSelfPermission(
                     this,
@@ -60,18 +58,18 @@ class Massage : FirebaseMessagingService() {
             ) {
                 return
             }
-            NotificationManagerCompat.from(this).notify(2, notification.build())
+            NotificationManagerCompat.from(this).notify(5, notification.build())
         }else {
             val builder = NotificationCompat.Builder(applicationContext)
                 .setSmallIcon(R.drawable.baseline_notifications_active_24)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setColor(Color.GREEN)
                 .setSound(notificationSoundUri)
 
             val notificationManager = NotificationManagerCompat.from(applicationContext)
-            notificationManager.notify(3, builder.build())
+            notificationManager.notify(5, builder.build())
 
         }
 
